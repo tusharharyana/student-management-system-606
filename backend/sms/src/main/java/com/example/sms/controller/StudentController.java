@@ -17,18 +17,18 @@ public class StudentController {
     @Autowired
     private StudentService service;
 
-    @GetMapping
-    public ArrayList<Student> getStudents() {
+    // @GetMapping
+    // public ArrayList<Student> getStudents() {
 
-    ArrayList<Student> students = new ArrayList<>();
+    // ArrayList<Student> students = new ArrayList<>();
 
-        students.add(new Student(1, "John Doe", "Mca"));
-        students.add(new Student(2, "Jane Smith", "Bca"));
-        students.add(new Student(3, "Alice Johnson", "Mca"));
+    //     students.add(new Student(1, "John Doe", "Mca"));
+    //     students.add(new Student(2, "Jane Smith", "Bca"));
+    //     students.add(new Student(3, "Alice Johnson", "Mca"));
 
-        return students;
+    //     return students;
     
-    }
+    // }
 
     @GetMapping("/bca")
     public List<Student> getBcaStudents(){
@@ -46,6 +46,16 @@ public class StudentController {
     @GetMapping("/message")
     public String getMessage(){
         return service.getStudentInfo();
+    }
+
+    @GetMapping
+    public List<Student> getStudents(){
+        return service.getAllStudents();
+    }
+
+    @PostMapping
+    public Student addStudent(@RequestBody Student student){
+        return service.saveStudent(student);
     }
 
 }

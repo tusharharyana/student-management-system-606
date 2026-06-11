@@ -8,6 +8,9 @@ import com.example.sms.repository.StudentRepository;
 import com.example.sms.model.Student;
 import java.util.List;
 
+import com.example.sms.exception.StudentNotFindException;
+import com.example.sms.dto.StudentRequestDTO;
+
 
 @Service
 public class StudentService {
@@ -37,4 +40,21 @@ public class StudentService {
     public Student saveStudent(Student student) {
         return repository.save(student);
     }
+
+    public Student getStudentById(Integer id) {
+        return repository
+                .findById(id)
+                .orElseThrow(() -> new StudentNotFindException("Student not found with id: " + id));
+    }
+
+    public Student addStudent(StudentRequestDTO dto) {
+
+        Student student = new Student();
+
+        student.setName(dto.getName());
+        student.setCourse(dto.getCourse());
+
+        return repository.save(student);
+    }
+
 }

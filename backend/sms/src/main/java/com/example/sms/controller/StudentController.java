@@ -9,6 +9,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.sms.service.StudentService;
 
+import org.springframework.http.ResponseEntity;
+import com.example.sms.dto.StudentResponseDTO;
+import com.example.sms.dto.StudentRequestDTO;
+
 @RestController
 @RequestMapping("/students")
 @CrossOrigin("*")
@@ -53,9 +57,31 @@ public class StudentController {
         return service.getAllStudents();
     }
 
+    // @PostMapping
+    // public Student addStudent(@RequestBody Student student){
+    //     return service.saveStudent(student);
+    // }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getStudentById(@PathVariable Integer id){
+
+        Student student = service.getStudentById(id);
+
+        StudentResponseDTO response = new StudentResponseDTO(
+                student.getId(),
+                student.getName(),
+                student.getCourse()
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
-    public Student addStudent(@RequestBody Student student){
-        return service.saveStudent(student);
+    public ResponseEntity<?> addStudent(@RequestBody StudentRequestDTO dto){
+
+        Student student = service.addStudent(dto);
+
+        return ResponseEntity.ok(student);
     }
 
 }

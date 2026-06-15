@@ -7,6 +7,9 @@ function App() {
   const [name, setName] = useState("");
   const [course, setCourse] = useState("");
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const getStudents = async () => {
     const response = await fetch("http://localhost:8080/students");
 
@@ -43,6 +46,18 @@ function App() {
     }
   };
 
+  const login = async () => {
+    const response = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    alert("Login Successful");
+  };
+
   return (
     <div style={{ padding: "40px" }}>
       <button onClick={getStudents}>Get Students</button>
@@ -77,6 +92,24 @@ function App() {
       />
 
       <button onClick={addStudent}>Register</button>
+
+      <br></br>
+      <br></br>
+      <br></br>
+
+      <input
+        placeholder="Enter Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+
+      <input
+        placeholder="Enter Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <button onClick={login}>Login</button>
     </div>
   );
 }

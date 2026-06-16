@@ -22,4 +22,9 @@ public class AuthController {
         return "Invalid credentials";
     }
 
+    @GetMapping("/google-success")
+    public String success(@AuthenticationPrincipalOAuth2User user){
+        return "Welcome" + user.getAttribute("name");
+    }
+
 }

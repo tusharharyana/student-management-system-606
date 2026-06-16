@@ -1,0 +1,11 @@
+# Secrets
+backend/sms/src/main/resources/application.properties
+
+# Spring
+*.log
+backend/sms/target/
+target/
+
+# Node
+node_modules/
+dist/

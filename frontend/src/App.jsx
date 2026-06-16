@@ -58,6 +58,10 @@ function App() {
     alert("Login Successful");
   };
 
+  const loginWithGoogle = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  };
+
   return (
     <div style={{ padding: "40px" }}>
       <button onClick={getStudents}>Get Students</button>
@@ -110,6 +114,8 @@ function App() {
       />
 
       <button onClick={login}>Login</button>
+
+      <button onClick={loginWithGoogle}>Login with Google</button>
     </div>
   );
 }

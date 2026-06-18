@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.sms.dto.LoginRequestDTO;
 import com.example.sms.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 @RestController
 @RequestMapping("/auth")
@@ -23,7 +25,7 @@ public class AuthController {
     }
 
     @GetMapping("/google-success")
-    public String success(@AuthenticationPrincipalOAuth2User user){
+    public String success(@AuthenticationPrincipal OAuth2User user){
         return "Welcome" + user.getAttribute("name");
     }
 

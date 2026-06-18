@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StudentCard from "./components/StudentCard";
 import StudentForm from "./components/StudentForm";
 
@@ -98,7 +98,17 @@ function App() {
 
   const [students, setStudents] = useState([]);
   const fetchStudents = async () => {
-    const response = await fetch("http://localhost:8080/students");
+    const token =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc4MTcwNjI1NiwiZXhwIjoxNzgxNzQyMjU2fQ.0ZqcK0_b1CbA_i7sSkht1AU_xW66CAKnDfePcozou0M";
+
+    const response = await fetch("http://localhost:8080/students", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
     const data = await response.json();
 
     setStudents(data);

@@ -23,6 +23,8 @@ public class JwtFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             
             String token = header.substring(7);
+            System.out.println("Header = " + header);
+            System.out.println("Token valid = " + jwtService.isValid(token));
             
             if(jwtService.isValid(token)){
                 String username = jwtService.getUsername(token);

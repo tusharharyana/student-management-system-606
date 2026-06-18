@@ -3,21 +3,25 @@ import { useState } from "react";
 function StudentForm() {
   const [name, setName] = useState("");
   const [course, setCourse] = useState("");
-  const [email, setEmail] = useState("");
 
   const addStudent = async () => {
-    await fetch("http://localhost:8080/students", {
+    const token =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc4MTcwNjI1NiwiZXhwIjoxNzgxNzQyMjU2fQ.0ZqcK0_b1CbA_i7sSkht1AU_xW66CAKnDfePcozou0M";
+
+    const res = await fetch("http://localhost:8080/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
 
       body: JSON.stringify({
         name,
         course,
-        email,
       }),
     });
+
+    alert("Student Added Successfully");
   };
 
   return (
@@ -31,8 +35,6 @@ function StudentForm() {
 
       <br />
       <br />
-
-      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
 
       <br />
       <br />

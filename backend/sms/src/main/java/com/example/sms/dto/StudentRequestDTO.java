@@ -4,6 +4,8 @@ public class StudentRequestDTO {
 
     private String name;
     private String course;
+    private String email;
+    private Integer age;
 
     public String getName() {
         return name;
@@ -19,5 +21,21 @@ public class StudentRequestDTO {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+     public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+     public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

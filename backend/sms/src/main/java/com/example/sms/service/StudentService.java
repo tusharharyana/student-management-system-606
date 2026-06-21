@@ -21,24 +21,25 @@ public class StudentService {
     @Autowired
     private StudentRepository repository;
 
-    public String getStudentInfo(){
-        return "Service is working!";
-    }
+/* //SAMPLE LEARNING METHODS
 
-    public Integer getStudentCount() {
+    // public String getStudentInfo(){
+    //     return "Service is working!";
+    // }
 
-        String sql = "SELECT COUNT(*) FROM student";
+    // public Integer getStudentCount() {
+    //     String sql = "SELECT COUNT(*) FROM student";
+    //     return jdbcTemplate.queryForObject(sql,Integer.class);
+    // }
 
-        return jdbcTemplate.queryForObject(sql,Integer.class);
+    // public Student saveStudent(Student student) {
+    //     return repository.save(student);
+    // }
 
-    }
+*/
 
     public List<Student> getAllStudents() {
        return repository.findAll();
-    }
-
-    public Student saveStudent(Student student) {
-        return repository.save(student);
     }
 
     public Student getStudentById(Integer id) {
@@ -47,12 +48,15 @@ public class StudentService {
                 .orElseThrow(() -> new StudentNotFindException("Student not found with id: " + id));
     }
 
+
     public Student addStudent(StudentRequestDTO dto) {
 
         Student student = new Student();
 
         student.setName(dto.getName());
         student.setCourse(dto.getCourse());
+        student.setEmail(dto.getEmail());
+        student.setAge(dto.getAge());
 
         return repository.save(student);
     }
@@ -64,14 +68,22 @@ public class StudentService {
 
         student.setName(dto.getName());
         student.setCourse(dto.getCourse());
+        student.setEmail(dto.getEmail());
+        student.setAge(dto.getAge());
         
         return repository.save(student);
     }
-
 
     public String deleteStudent(Integer id) {
         repository.deleteById(id);
         return "Student deleted successfully";
     }
 
+     public List<Student> searchStudents(String name) {
+        return repository.findByNameContainingIgnoreCase(name);
+    }
+
+     public Long getStudentCount() {
+        return repository.count();
+    }
 }

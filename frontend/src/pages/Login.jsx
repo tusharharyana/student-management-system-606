@@ -1,5 +1,13 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Container,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  Box,
+} from "@mui/material";
 import { loginApi } from "../services/studentService";
 import { AuthContext } from "../context/AuthContext";
 
@@ -25,26 +33,72 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Paper
+          elevation={6}
+          sx={{
+            padding: 4,
+            width: "100%",
+          }}
+        >
+          <Typography
+            variant="h6"
+            textAlign="center"
+            gutterBottom
+            color="primary"
+            fontWeight="bold"
+          >
+            Student Management System
+          </Typography>
 
-      <input
-        placeholder="Username"
-        onChange={(e) => setUsername(e.target.value)}
-      />
+          <Typography
+            variant="h6"
+            textAlign="center"
+            gutterBottom
+            fontWeight="bold"
+            fontS
+          >
+            Login
+          </Typography>
 
-      <br />
+          <TextField
+            fullWidth
+            label="Username"
+            margin="normal"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
+          <TextField
+            fullWidth
+            type="password"
+            label="Password"
+            margin="normal"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-      <br />
-
-      <button onClick={handleLogin}>Login</button>
-    </div>
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{
+              mt: 2,
+            }}
+            onClick={handleLogin}
+          >
+            Login
+          </Button>
+        </Paper>
+      </Box>
+    </Container>
   );
 }
 

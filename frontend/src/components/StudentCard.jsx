@@ -1,17 +1,29 @@
-function StudentCard({ name, course }) {
+import { Link } from "react-router-dom";
+
+function StudentCard({ student, onDelete }) {
   return (
     <div
       style={{
-        border: "1px solid black",
+        border: "1px solid gray",
         padding: "10px",
         margin: "10px",
-        width: "200px",
       }}
     >
-      <h1>Welcome Dear</h1>
-      <h2>This is Student Card</h2>
-      <p>{name}</p>
-      <p>{course}</p>
+      <h3>{student.name}</h3>
+      <p>
+        Email:
+        {student.email}
+      </p>
+      <p>
+        Course:
+        {student.course}
+      </p>
+      <p>
+        Age:
+        {student.age}
+      </p>
+      <Link to={`/students/edit/${student.id}`}>Edit</Link>{" "}
+      <button onClick={() => onDelete(student.id)}>Delete</button>
     </div>
   );
 }

@@ -1,46 +1,64 @@
 import { useState } from "react";
 
-function StudentForm() {
+function StudentForm({ onSubmit }) {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [course, setCourse] = useState("");
+  const [age, setAge] = useState("");
 
-  const addStudent = async () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc4MTcwNjI1NiwiZXhwIjoxNzgxNzQyMjU2fQ.0ZqcK0_b1CbA_i7sSkht1AU_xW66CAKnDfePcozou0M";
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const res = await fetch("http://localhost:8080/students", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-
-      body: JSON.stringify({
-        name,
-        course,
-      }),
+    onSubmit({
+      name,
+      email,
+      course,
+      age,
     });
 
-    alert("Student Added Successfully");
+    setName("");
+    setEmail("");
+    setCourse("");
+    setAge("");
   };
 
   return (
-    <div>
-      <input placeholder="Name" onChange={(e) => setName(e.target.value)} />
+    <form onSubmit={handleSubmit}>
+      <input
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
 
       <br />
+
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
       <br />
 
-      <input placeholder="Course" onChange={(e) => setCourse(e.target.value)} />
+      <input
+        placeholder="Course"
+        value={course}
+        onChange={(e) => setCourse(e.target.value)}
+      />
 
       <br />
-      <br />
+
+      <input
+        type="number"
+        placeholder="Age"
+        value={age}
+        onChange={(e) => setAge(e.target.value)}
+      />
 
       <br />
-      <br />
 
-      <button onClick={addStudent}>Add Student</button>
-    </div>
+      <button type="submit">Add Student</button>
+    </form>
   );
 }
 
